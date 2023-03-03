@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body,button,p{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-size: 16px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #app{
+            width: 60vw;
+        }
+        button{
+            background-color: cadetblue;
+            width: 100%;
+            border: none;
+            padding: 10px 10px;
+            text-align: left;
+            position: relative;
+        }
+        button::after{
+            content: '+';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            font-size: 1.4em;
+            transform: translateY(-50%);
+        }
+        button:hover{
+            cursor: pointer;
+            background-color: #ccc;
+        }
+        .content{
+            /* height: 0; */
+            max-height: 0;
+            overflow: hidden;
+            transition: .8s;
+            font-size: 14px;
+            background-color: antiquewhite;
+            padding: 0 15px;
+            /* display: none; */
+        }
+        .content p{
+            padding: 10px 10px;
+        }
+        .show::after{
+            content: '—';
+            font-size: 1.4em;
+        }
+        .show + .content{
+            max-height: 200px;
+        } 
+    </style>
+</head>
+<body>
+    <!-- accordion: 手风琴 -->
+    <section id="app">
+        <div class="itme">
+            <button>第一部分</button>
+            <div class="content">
+                <p>JavaScript中NumberMAXSAFEINTEGER表示最大安全数字，计算结果是
+                    9007199254740991,即在这个数范围内不会出现精度丢失</p>
+                <p> (小数除外)。但是一旦超过这个范围，js就会出现计算不准确的情况，
+                    这在大数计算的时候不得不依靠一些第三方库进行解决，因此官方提出了BigInt来解决此问题。</p>
+            </div>
+        </div>
+        <div class="itme">
+            <button>第二部分</button>
+            <div class="content">
+                <p>JavaScript中Number.MAX_SAFE_INTEGER表示最大安全数大数计算的时候不得不依靠一些第三方库进行解决，因此官方提出了BigInt来解决此问题。</p>
+            </div>
+        </div>
+        <div class="itme">
+            <button>第三部分</button>
+            <div class="content">
+                <p>JavaScript中NumberMAX_SAFEINTEGER表</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const content = document.querySelectorAll('.content')
+        const btnArr = document.querySelectorAll('button')
+        let last = btnArr[0]
+
+        btnArr.forEach((btn) => {
+            btn.addEventListener('click',() => {
+                console.log(btn.classList.contains('show'));
+                if(btn.classList.contains('show')){
+                    // 点击同一个按钮是执行 toggle:可以添加 可以是删除。点击一次是添加，点击两次删除
+                    btn.classList.toggle('show')
+                } else{
+                    // 点击的不同的按钮时执行
+                    last.classList.remove('show')
+                    btn.classList.add('show')
+                    last = btn
+                }
+
+
+
+
+                // // 2.修改上一个btn的max-height = 0
+                // last.nextElementSibling.style.maxHeight = '0px'
+                // // 点击btn：1.修改nextElementSibling
+                // btn.nextElementSibling.style.maxHeight = '150px'
+                // // 3.更新last为当前点击的btn
+                // last = btn
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="success">
+        <p>注册成功！您的信息如下：</p>
+        <ul>
+            <li>邮箱地址：xxx@126.com</li>
+            <li>密码：123456</li>
+            <li>手机号：17363956575</li>
+        </ul>
+    </div>
+
+    <script>
+        //http://127.0.0.1:5501/2023/0228/index.html?email=&password=&tel=
+        // 获取li的所有元素
+        const liArr = document.querySelectorAll('li')
+        // ?email=&password=&tel= 查询字符串
+        const queryStr = window.location.search
+        // 把获取到的字符串转成数组
+        const arr =  queryStr.slice(1).split('&');
+        
+        let email = arr[0].slice(6)
+        let mima = arr[1].slice(9)
+        let phone = arr[2].slice(9)
+
+        console.log(email,mima,phone);
+        window.addEventListener("load",function(){
+            liArr[0].innerHTML = `邮箱地址：${email}`
+            liArr[1].innerHTML = `密码：${mima}`
+            liArr[2].innerHTML = `手机号码：${phone}`
+        })
+    </script>
+</body>
+</html>

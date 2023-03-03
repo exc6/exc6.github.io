@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            position: absolute;
+            top: 40%;
+            left: 40%;
+        }
+
+        input {
+            position: absolute;
+            left: 45%;
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+    <input type="number" name="" id="" value="1" max="10" min="1">
+
+    <script>
+        const h1 = document.querySelector('h1')
+        const input = document.querySelector('input')
+        let str = '吃饭、睡觉、写代码....'
+        let num = 0
+        let speed = 500 / input.value 
+        fn()
+        function fn() {
+            h1.innerHTML = str.slice(0, num)
+            num++
+            if (num >= str.length) {
+                num = ''
+            }
+            setTimeout(fn, speed)
+        }
+
+        input.addEventListener('input',()=>{
+            speed = speed/input.value + 80
+        })
+    </script>
+</body>
+
+</html>

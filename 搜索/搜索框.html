@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3927888_a63hbujy2jd.css">
+    <title>放大</title>
+    <style>
+        body{
+            background-color: cadetblue;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div{
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        input{
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            position: relative;
+            transition: 1s;
+            outline: none;
+        }
+        .iconfont{
+            font-size: 25px;
+            position: absolute;
+            top: 2px;
+            left: 8px;
+            transition: 1s;
+            text-align: center;
+            line-height: 40px;
+        }
+        /* .active{
+            width: 100px;
+        } */
+    </style>
+</head>
+<body>
+    <div>
+        <input ><i class="iconfont icon-sousuoxiao"></i></input>
+    </div>
+    <script>
+        const i = document.querySelector('.iconfont')
+        const input = document.querySelector('input')
+        let on = true
+        i.addEventListener('click',function(){
+            input.style.width = '100px'
+            i.style.left = '80px'
+            input.placeholder = "搜索..."
+        })
+        input.addEventListener('blur',function(){
+            input.style.width = '30px'
+            i.style.left = '8px'
+            input.placeholder = ''
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            background-color: cadetblue;
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            position: relative;
+        }
+        input{
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
+            position: absolute;
+            left: 200px;
+        }
+        span{
+            background-color: rgb(0, 0, 0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
+        span::before{
+            /* 内容为空 */
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            height: 46px ;
+            width: 46px;
+            background-color: white;
+            transition: .5s;
+        }
+        input:checked +  span::before{
+            transform: translateX(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="btn">
+            <h2>好</h2>
+            <label>  <!-- 行内元素 -->
+                <input type="checkbox"> <!-- 隐藏的 -->
+                <span></span>
+            </label>
+        </div>
+        <div class="btn">
+            <h2>慢</h2>
+            <label>  <!-- 行内元素 -->
+                <input type="checkbox"> <!-- 隐藏的 -->
+                <span></span>
+            </label>
+        </div>
+        <div class="btn">
+            <h2>便宜</h2>
+            <label>  <!-- 行内元素 -->
+                <input type="checkbox"> <!-- 隐藏的 -->
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <script>
+        const divArr = document.querySelectorAll('.btn')
+        const input1 = document.querySelectorAll('input')[0]
+        const input2 = document.querySelectorAll('input')[1]
+        const input3 = document.querySelectorAll('input')[2]
+        divArr.forEach(div => div.addEventListener('change',(ev) => {
+            if(input1.checked && input2.checked && input3.checked){
+                if(input1 === ev.target){
+                    input3.checked = false
+                }
+                if(input2 === ev.target){
+                    input1.checked = false
+                }
+                if(input3 === ev.target){
+                    input2.checked = false
+                }
+            }
+        }))
+    </script>
+</body>
+</html>

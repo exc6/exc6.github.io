@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        button,
+        body,
+        p,ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-size: 16px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #accordion {
+            width: 30vw;
+            border: 1px solid black;
+        }
+
+        button {
+            background-color: rgb(218, 236, 242);
+            width: 100%;
+            border: none;
+            padding: 10px 10px;
+            text-align: left;
+            position: relative;
+            font-weight: 600;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+        .content {
+            max-height: 0;
+            overflow: hidden;
+            background-color: rgba(222, 234, 115, 0.955);
+            /* transition:.8s; */
+        }
+        ul{
+            list-style: none;
+        }
+       li{
+            padding: 5px;
+            line-height: 20px;
+            border-bottom: 1px solid black;
+        }
+        .active+.content {
+            transition: 1s;
+            max-height: 250px;
+        }
+       .color{
+        background-color: rgb(67, 213, 213);
+       } 
+    </style>
+</head>
+
+<body>
+    <!-- 手风琴：accordion -->
+    <section id="accordion">
+        <div class="item">
+            <button>联系人</button>
+            <div class="content">
+                <ul>
+                    <li>张三</li>
+                    <li>张三</li>
+                    <li>张三</li>
+                    <li>张三</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <button>企业联系人</button>
+            <div class="content">
+                <ul>
+                    <li>李四</li>
+                    <li>李四</li>
+                    <li>李四</li>
+                    <li>李四</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <button>黑名单</button>
+            <div class="content">
+                <ul>
+                    <li>王五</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script>
+        const divArr = document.querySelectorAll(".content")
+        const btnArr = document.querySelectorAll("button")
+        const liArr = document.querySelectorAll("li")
+        let last = btnArr[0]
+        btnArr.forEach((btn) => btn.addEventListener("click", (ev) => {
+            //2:清除上一个的active
+            if (btn.classList.contains("active")) {
+                btn.classList.toggle("active")
+                btn.style.background = "rgb(218, 236, 242)"
+            } else {
+                last.classList.remove("active")
+                last.style.background = "rgba(115, 228, 234, 0.955"
+                btn.style.background = "rgb(67, 213, 213)"
+                //1.加类
+                btn.classList.add("active")
+                //3.修改last当前点击的btn
+            }
+            last = btn
+        }))
+        let last1 = liArr[0]
+        liArr.forEach((li) => li.addEventListener("click", (ev) => {
+            last1.classList.remove("color")
+            li.classList.add("color")
+            last1 = li
+            
+        }))
+    </script>
+</body>
+
+</html>

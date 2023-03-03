@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            background-color: rgb(59, 87, 186);
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            position: relative;
+            border-radius: 8px;
+        }
+        input{
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
+            position: absolute;
+            left: 200px;
+        }
+        span{
+            /* background-color: rgb(0, 0, 0); */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            /* border-radius: 8px; */
+        }
+        span .off{
+            /* 内容为空 */
+            /* content: 'OFF'; */
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: rgb(30, 64, 236);
+            z-index: 2;
+            
+        }
+        span .on{
+            /* 内容为空 */
+            /* content: 'ON'; */
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            color: #fff;
+            /* 层级关系 */
+            z-index: 2;
+            ;
+        }
+        span i{
+            /* 内容为空 */
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            height: 46px ;
+            width: 47px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: .5s;
+            z-index: 1;
+        }
+        input:checked +  span i{
+            transform: translateX(50px);
+        }
+        input:checked + span{
+            background-color: aquamarine;
+            border-radius: 5px
+        }
+        input:checked + span .on{
+            color: aquamarine;
+        }
+        input:checked + span .off{
+            color: #fff;
+        }
+        
+
+
+
+
+        
+        /* .off{
+            position: absolute;
+            left: 10px;
+            color: rgb(59, 87, 186);
+        }
+        .no{
+            position: absolute;
+            right: 11px;
+            top: 0px;
+            color: wheat;
+        } */
+    </style>
+</head>
+<body>
+  
+    <label>  <!-- 行内元素 -->
+        <input type="checkbox"> <!-- 隐藏的 -->
+        <span>
+            <i></i>
+            <div class="off">OFF</div>
+            <div class="on">ON</div>
+        </span>
+        <!-- <p class="off">oFF</p>
+        <p class="no">NO</p> -->
+    </label>
+
+
+
+
+    
+    <!-- <script>
+        const input = document.querySelector('input')
+        const span = document.querySelector('span')
+        const p = document.querySelector('.off')
+        const p1 = document.querySelector('.no')
+        let on = true
+        input.addEventListener('click',() => {
+            p.style.color = ''
+           if(on === true){
+            span.style.backgroundColor = 'green'
+            p.style.color = "wheat"
+            p1.style.color = 'green'
+            on = false
+           }else{
+            span.style.backgroundColor = 'rgb(59, 87, 186)'
+            p.style.color = "rgb(59, 87, 186)"
+            p1.style.color = 'wheat'
+            on = true
+           }
+        })
+    </script> -->
+</body>
+</html>

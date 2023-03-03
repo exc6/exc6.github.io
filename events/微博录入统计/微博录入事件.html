@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+     * {
+        box-sizing: border-box;
+    }
+    
+    form {
+        width: 500px;
+        border: 1px solid #ccc;
+    }
+    
+    textarea {
+        width: 100%;
+    }
+    
+    .panel {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+   </style>
+</head>
+<body>
+    <form action="">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <div class="panel">
+            <span>0</span>
+            <button>发送</button>
+        </div>
+    </form>
+    <script>
+        const textarea = document.querySelector('textarea')
+        const span = document.querySelector('span')
+        // 创建变量
+        let len = 0
+        let finished = true
+        textarea.value = ''
+        // 开始合成事件
+        textarea.addEventListener('compositionstart',function(){
+            finished = false
+        })
+        textarea.addEventListener('input',function(){
+           if(finished){
+             // len = 文本框value值的长度
+             len = textarea.value.length
+            // span的内容 = len 也就是等于文本框value值的长度
+            span.innerHTML = len
+           }
+        //    当span.innerHTML的值 > 200的时候
+           if(len > 200){
+            // span的颜色变成红色
+            span.style.color = 'red'
+            // span的值为 -span.innerHTML -200 为负数
+            span.innerHTML = -(len - 200)
+           } else{
+            // 在200以内为整数
+            span.style.color = "black"
+           }
+        })
+        // 结束合成事件
+        textarea.addEventListener('compositionend',function(){
+            finished = true
+        })
+    </script>
+</body>
+</html>

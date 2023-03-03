@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        #app {
+            /* 开启弹性盒模型 */
+            display: flex;
+            /* 水平居中 */
+            justify-content: center;
+            /* 垂直居中 */
+            align-items: center;
+            /* 换行 */
+            flex-wrap: wrap;
+            /*  */
+            gap: 2px 5px;
+            width: 800px;
+            /* border: 2px solid red; */
+            height: 100vh;
+        }
+
+        #app div {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(91, 89, 87, 0.345);
+            transition: .6s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        1.在#app下面生成800个div 使用for循环
+        2.让div出现
+        3.让div按照一行20个排列
+        4.鼠标悬停让div的背景变成红色
+        5.鼠标mouseout div的时候让div的背景色变成灰色
+        6.鼠标mouseout div的时候让div的背景色1秒之后变成灰色
+        7.修改红色为数组里的颜色
+     -->
+    <div id="app">
+
+    </div>
+    <script>
+        const div = document.querySelector('#app')
+        // const colorArr = ['red', 'yellow', 'pink', 'blue']
+        let timer
+        for (let i = 0; i < 800; i++) {
+            // div的内容 = div.内容 + 800个div
+            div.innerHTML += "<div></div>"
+        }
+        const divArr = document.querySelectorAll('#app div')
+        console.log(divArr);
+        divArr.forEach((div, index) => {
+            div.addEventListener('mouseover', () => {
+                // div.style.background = `${colorArr[index % colorArr.length]}`
+                div.style.background = rgb()
+            })
+            div.addEventListener('mouseout', () => {
+                timer = setTimeout(() => {
+                    div.style.background = 'rgba(91, 89, 87, 0.345)'
+                    // div.style.boxShadow = '10px 10px 10px 10px'
+                }, 500);
+            })
+        })
+        function rgb() {//rgb颜色随机
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;
+        }
+
+    </script>
+</body>
+</html>

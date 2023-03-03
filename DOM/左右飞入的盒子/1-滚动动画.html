@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: beige;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        div{
+            width: 40vh;
+            height: 20vh;
+            background-color: aquamarine;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid slategrey;
+            margin: 20px;
+            transform: translateX(-400px);
+            font-size: 1.5rem;
+            transition: 1s;
+            opacity: 0;
+        }
+        div:nth-of-type(even){
+            transform: translateX(400px);
+        }
+        div.show{
+            transform: translateX(0px);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>拖动滚动条查看效果</h1>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+    <div>你好世界</div>
+
+    <script>
+        // 推动滚动条 有条件添加或删除 .show类
+        const divArr = document.querySelectorAll('div')
+        window.addEventListener('scroll',showFn)
+
+          
+        // function showFn(){
+        //    divArr.forEaceth(div => {
+        //     if(parseInt(div.getBoundingClientRect().top) <  window.innerHeight/6*5 ){
+        //     div.classList.add('show')
+        //    } else{
+        //     div.classList.remove('show')
+        //    }
+        //    })
+        // }
+        function showFn(){
+           for(let i = 0; i < divArr.length; i++){
+            if(parseInt(divArr[i].getBoundingClientRect().top) < window.innerHeight / 6*5){
+                divArr[i].classList.add('show')
+           } else{
+            divArr[i].classList.remove('show')
+           }
+           }
+        }
+
+
+    </script>
+</body>
+</html>
