@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>常见问题效果</title>
     <style>
         *{
             box-sizing: border-box;
@@ -30,6 +30,8 @@
             padding: 10px 10px;
             text-align: left;
             position: relative;
+            border-radius: 5px;
+            border: 1px solid black;
         }
         button::after{
             content: '+';
@@ -63,6 +65,10 @@
         .show + .content{
             max-height: 200px;
         } 
+        .itme{
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -104,10 +110,12 @@
                     btn.classList.toggle('show')
                 } else{
                     // 点击的不同的按钮时执行
-                    last.classList.remove('show')
+                    // last.classList.remove('show')
                     btn.classList.add('show')
                     last = btn
                 }
+
+
 
 
                 // // 2.修改上一个btn的max-height = 0
@@ -120,12 +128,5 @@
         });
     </script>
 </body>
-</html>
 
-<!-- 
-    1.点击按钮 展开内容
-    2.悬停按钮 背景变色 光标变手
-    3.再次点击同一个按钮 折叠内容 -变 + 
-    4.点击下一个，折叠上一个
-    5.展开折叠存在过渡
- -->
+</html>
