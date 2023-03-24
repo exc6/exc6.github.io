@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用面向对象编程写选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .tabs{
+            width: 500px;
+            height: 400px;
+            border: 1px solid black;
+        }
+        .tabs-header{
+            background-color: aquamarine;
+        }
+        button{
+            width: 100px;
+            height: 50px;
+            padding: 5px 20px;
+        }
+        .tabs-content{
+           position: relative;
+        }
+        .tabs-content div{
+            height: 350px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        .tabs-content .box1{
+            background-color: blue;
+            display: block;
+        }
+        .tabs-content .box2{
+            background-color: chartreuse;
+        }
+        .tabs-content .box3{
+            background-color: cadetblue;
+        }
+        .active{
+           background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="tabs1" class="tabs">
+        <div class="tabs-header">
+            <button>栏目1</button> <button>栏目2</button> <button>栏目3</button>
+        </div>
+        <div class="tabs-content">
+            <div class="box1">内容1</div>
+            <div class="box2">内容2</div>
+            <div class="box3">内容3</div>
+        </div>
+    </div>
+    <div id="tabs2" class="tabs">
+        <div class="tabs-header">
+            <button>栏目1</button> <button>栏目2</button> <button>栏目3</button>
+        </div>
+        <div class="tabs-content">
+            <div class="box1">内容1</div>
+            <div class="box2">内容2</div>
+            <div class="box3">内容3</div>
+        </div>
+    </div>
+    <script>
+        //   const tabs1 = document.querySelector('#tabs1')
+        //   const tabs2 = document.querySelector('#tabs2')
+        //   构造函数和普通函数调用时的区别：构造函数要使用new调用
+        //   构造函数和普通函数调用时的区别：构造函数名要大写
+     function Tab(id){
+           // 获取元素
+        this.container = document.querySelector(id)
+        this.btnArr = this.container.querySelectorAll('button')
+        this.divArr = this.container.querySelectorAll('.tabs-content div')
+        // 声明变量
+        this.last = 0
+        this.len = this.btnArr.length
+        // this.num = 0
+
+        // 客户需求：点击按钮  切换内容
+        // 编程需求：1.点击按钮 清除上一个active,为当前按钮添加active
+        // 2.隐藏上一个显示的内容块，显示当前内容块
+
+        // 1.批量注册点击事件
+     }
+     Tab.prototype.switch = function(){
+        let This = this
+        for(let i=0;i<this.len;i++){
+            this.btnArr[i].addEventListener('click',function(){
+                This.btnArr[This.last].classList.remove('active')
+                This.btnArr[i].classList.add('active')
+                This.divArr[This.last].style.display = 'none'
+                This.divArr[i].style.display = 'block'
+                This.last = i
+            })
+        }
+     }
+     Tab.prototype.autoPlay = function(){
+        let This = this
+        window.setInterval(function(){
+            console.log(This.last);
+            This.btnArr[This.last].classList.remove('active')
+            This.last++
+            This.btnArr[This.last].classList.add('active')
+
+            // This.btnArr[2].classList.remove('active')
+            // if(This.last === 2) This.last = -1
+            // This.last++
+            // This.btnArr[0].classList.add('active')
+           
+            // This.btnArr[2].classList.remove('active')
+            // This.btnArr[0].classList.add('active')
+
+            // This.btnArr[0].classList.remove('active')
+            // This.btnArr[1].classList.add('active')
+
+            // This.btnArr[1].classList.remove('active')
+            // This.btnArr[2].classList.add('active')
+
+        },1000)
+        // window.setInterval(function(){
+        //     if(This.num === 0){
+        //         // console.log(btnArr);
+        //         This.btnArr[This.len - 1].classList.remove('active') 
+        //         This.divArr[This.len - 1].style.display = 'none'
+        //     } else{
+        //         This.btnArr[This.num - 1].classList.remove('active') 
+        //         This.divArr[This.num - 1].style.display = 'none'
+        //     }
+        //         This.btnArr[This.num].classList.add('active')
+        //         This.divArr[This.num].style.display = 'block'
+        //         This.num++
+        //        if(This.num === This.len)  This.num = 0
+
+        // }, 1000);
+     }
+        const tab1 = new Tab('#tabs1')
+        const tab2 = new Tab('#tabs2')
+        tab1.switch()
+        tab2.switch()
+        tab1.autoPlay()
+        tab2.autoPlay()
+    </script>
+</body>
+</html>
