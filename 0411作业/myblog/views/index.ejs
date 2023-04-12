@@ -1,0 +1,108 @@
+<form action="/todo/add" method="POST" class="row g-3 mt-3">
+    <div class="col-auto d-none">
+        <label for="staticEmail2" class="visually-hidden">Email</label>
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+    </div>
+    <div class="col-auto">
+        <div class="row">
+            <div class="col-12">
+                <label for="inputPassword2" class="visually-hidden">Password</label>
+                <input type="text" name="title" class="form-control" id="inputPassword2" placeholder="请使用一句话描述任务">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary mb-3">添加任务</button>
+                <!-- <input type="submit" value=""> -->
+            </div>
+        </div>
+    </div>
+</form>
+<ul class="list-group">
+    <li class="list-group-item active" aria-current="true">
+        任务清单
+    </li>
+    <!-- 数据data：数组 -->
+    <% data.forEach( item=> { %>
+        <li class="list-group-item">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8">
+                        <p>
+                            <%= item.title %>
+                        </p>
+                        <input class="d-none" type="text" value="<%= item.title %>">
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <button class="btnSubmit btn btn-secondary d-none">取消</button>
+                        <button data-url="/todo/update/<%= item._id %>"
+                            class="btnEdit btn btn-secondary d-none">确定</button>
+                        <button class="btnCancel btn btn-secondary">编辑</button>
+                        <a href="/todo/delete/<%= item._id %>" class="btn btn-danger">删除</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <% }) %>
+</ul>
+
+<script>
+    // 为第一个按钮添加点击事件
+    const btnEditArr = document.querySelectorAll('.btnEdit')
+    const btnCancelArr = document.querySelectorAll('.btnCancel')
+    const btnSubmitArr = document.querySelectorAll('.btnSubmit')
+    const len = btnCancelArr.length
+    // putFn(btnCancelArr[0],btnSubmitArr[0],btnEditArr[0])
+    for(let i = 0; i < len; i++){
+         putFn(btnCancelArr[i],btnSubmitArr[i],btnEditArr[i])
+    }
+
+    function putFn(btnCancel,btnSubmit,btnEdit){
+          // const btnCancel
+    btnCancel.addEventListener('click', (ev) => {
+        // 1创建或显示
+        // target: 返回触发事件的元素
+        // parentElement：表示父元素节点
+        ev.target.parentElement.children[0].classList.remove('d-none')
+        ev.target.parentElement.children[1].classList.remove('d-none')
+        // 2删除
+        ev.target.parentElement.parentElement.children[0].children[0].classList.add('d-none')
+        ev.target.parentElement.parentElement.children[0].children[1].classList.remove('d-none')
+        ev.target.classList.add('d-none')
+    })
+    // 4取消btnCancel、btnSubmit
+    btnSubmit.addEventListener('click', (e) => {
+        // 二显示
+        // nextElementSibling：表示指定元素后的下一个兄弟元素节点
+        e.target.parentElement.parentElement.children[0].children[0].classList.remove('d-none')
+        e.target.nextElementSibling.nextElementSibling.classList.remove('d-none')
+        // 三消失
+        e.target.nextElementSibling.classList.add('d-none')
+        e.target.parentElement.parentElement.children[0].children[1].classList.add('d-none')
+        e.target.classList.add('d-none')
+    })
+    // 5.点击确定按钮
+    btnEdit.addEventListener('click', function () {
+        const data = { title: this.parentElement.parentElement.children[0].children[1].value }
+        console.log(data);
+        const url = btnEdit.dataset.url
+        const options = {
+            // 描述请求方式是:PUT
+            method: 'PUT',
+            // headers: 请求头信息：请求的数据类型(或请求的编码)
+            headers: { "Content-Type": "application/json" },
+            // body：请求的正文。正文格式必须和headers保持一致。
+            body: JSON.stringify(data)
+        }
+        fetch(url, options)
+            .then((data) => data.json())
+            .then(data => {
+                console.log(data)
+               return window.location.href = data.redirect
+            })
+            .catch(err => console.log(err))
+    })
+    }
+
+
+</script>
